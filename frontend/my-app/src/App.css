@@ -1,0 +1,56 @@
+html body {
+  background-color: #353535;
+  text-align: center;
+  color: white
+}
+
+.modal {
+  color: black
+}
+
+html a {
+  color: white;
+  text-decoration: none;
+}
+
+.team-container:hover {
+  border: #ebe2cd solid 2px
+}
+#team-name:hover {
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.logo {
+  height: 60px;
+  cursor: pointer;
+}
+
+.logo:hover {
+  height: 80px;
+}
+
+.team-info-logo {
+  height: 100px;
+  margin: 15px;
+}
+
+.team-info{
+  background-color: #5f5f5f;
+  width: 1000px;
+  border-radius: 1%;
+  margin: 10px;
+}
+.website:hover{
+  color: grey
+}
+html .display-6{
+  font-size: 1.5rem;
+}
+.team-info-buttons{
+  display: inline-flex;
+  margin: 10px;
+}
+#form-inputs input, #form-inputs label{
+  margin: 10px;
+}
