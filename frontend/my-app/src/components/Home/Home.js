@@ -8,6 +8,7 @@ import useHomeEffect from "../../hooks/useHomeEffect";
 import { useContext } from "react";
 import paramSearch from "../../services/params";
 import AddTeamButton from "./Add-team-button";
+import RestoreButton from "./Restore-button";
 
 
 function Home() {
@@ -25,6 +26,7 @@ function Home() {
 			<title> Club CRUD Web </title>
 			<Title />
 			<AddTeamButton />
+			<RestoreButton />
 			<Loading loading={state.loading} />
 			<TeamsList teamsData={state.data} />
 			<MyToast  type={typeParam} showToast={showToastParam} text={messageParam}/>

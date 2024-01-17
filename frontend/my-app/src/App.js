@@ -9,6 +9,7 @@ import EditTeam from "./components/Edit-team/Edit-team";
 import StateProvider from "./context/State-provider";
 import AddTeam from "./components/Add-team/Add-Team";
 import DeleteTeam from "./components/Delete-team/Delete-team";
+import RestoreDatabase from "./components/Restore-database/Restore-database";
 
 
 
@@ -23,6 +24,8 @@ function App() {
 					<Route path="/edit/:teamName/:teamId" element={ <EditTeam />}/>
 					<Route path="/add-team" element={<AddTeam />}/>
 					<Route path="/delete-team/:teamId" element={<DeleteTeam />}/>
+					<Route path="/restore-database" element={<RestoreDatabase />}/>
+
 				</Routes>
 			</StateProvider>
 		</Router>

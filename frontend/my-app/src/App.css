@@ -16,7 +16,7 @@ html a {
 .team-container:hover {
   border: #ebe2cd solid 2px
 }
-#team-name:hover {
+.team-name:hover {
   font-size: 1.8rem;
   cursor: pointer;
 }
@@ -53,4 +53,13 @@ html .display-6{
 }
 #form-inputs input, #form-inputs label{
   margin: 10px;
+}
+.sub-title-button{
+  padding: 10px;
+}
+.sub-title-button:hover{
+  color: lightgrey;
+  border: 0.5px white solid;
+  border-radius: 5%;
+
 }

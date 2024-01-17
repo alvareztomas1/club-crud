@@ -4,7 +4,7 @@ const router = express.Router();
 const { getTeamsList } = require("../services/teams");
 
 router.get("/", (req, res) => {
-    const teamsListFilePath = path.join(__dirname, "../data/teams.json"); 
+    const teamsListFilePath = path.join(__dirname, "../data/teams-backup.json"); 
     const teamsList = getTeamsList(teamsListFilePath);
 
     if(teamsList){

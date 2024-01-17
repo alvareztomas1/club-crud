@@ -9,6 +9,7 @@ const teamRoute = require("./src/routes/team");
 const editTeam = require("./src/routes/edit-team");
 const addTeam = require("./src/routes/add-team");
 const deleteTeam = require("./src/routes/delete-team");
+const restoreDatabase = require("./src/routes/restore-database")
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use("/team", teamRoute);
 app.use("/edit", editTeam);
 app.use("/add-team", addTeam);
 app.use("/delete", deleteTeam);
+app.use("/restore-database", restoreDatabase);
 
 
 
