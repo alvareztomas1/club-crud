@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from "react";
-import Home from "../Home/Home";
+import React from "react";
 import deleteTeamUseffect from "../../hooks/deleteTeamHook";
-import { Spinner } from "react-bootstrap";
 import Loading from "../Loading";
 
 

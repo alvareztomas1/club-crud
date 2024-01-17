@@ -3,7 +3,7 @@ import TeamName from "./Form/Team-name";
 import TeamAbbreviation from "./Form/Team-abbreviation";
 import Website from "./Form/Website";
 import Phone from "./Form/Phone";
-import FoundedYear from "./Form/Team-year";
+import FoundedYear from "./Form/Founded-year";
 import Address from "./Form/Address";
 import Stadium from "./Form/Stadium";
 import Email from "./Form/Email";

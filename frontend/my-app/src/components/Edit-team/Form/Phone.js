@@ -8,8 +8,8 @@ const Phone = ({phone, validation}) => {
 				<input type="text"
 					className={`form-control is-${validation ? validation.phone ? "valid" : "invalid" : ""}`}
 					name="phone" id="phone" placeholder="+44 (020) 76195003" defaultValue={phone}/>
-				<div className="invalid-feedback">
-                            Please enter a valid phone number. It must follow the international format.
+				<div id="phone-feedback" className="invalid-feedback">
+                    Please enter a valid phone number. It must follow the international format.
 				</div>
 			</div>
 		</div>

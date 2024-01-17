@@ -10,17 +10,17 @@ const MyModal = ({ id }) => {
 		
 	return (
 		<div id="modal">
-			<Button variant="danger" onClick={handleShow}>
+			<Button id={`show-${id}-modal-button`} variant="danger" onClick={handleShow}>
                 Delete <i className="bi bi-trash"></i>
 			</Button>
 
-			<Modal show={show} onHide={handleClose} size="sm" centered>
-				<Modal.Header closeButton> 
+			<Modal id={`${id}-modal`} show={show} onHide={handleClose} size="sm" centered>
+				<Modal.Header  closeButton id={`close-${id}-modal`}> 
 					<strong>Sure you want to delete?</strong>	
 				</Modal.Header>
 
 				<Modal.Footer>
-					<a className="btn btn-danger" href={`/delete-team/${id}`}>Delete</a>	
+					<a id={`${id}-delete-button`} className="btn btn-danger delete-button" href={`/delete-team/${id}`}>Delete</a>	
 				</Modal.Footer>
 			</Modal>
 

@@ -10,5 +10,6 @@ export default function setFormData(form){
 	formData.append("founded", form["founded-year"].value);
 	formData.append("tla", form.nameAbbreviation.value);
 
+	console.log(form.logo.files[0]);
 	return formData;
 }

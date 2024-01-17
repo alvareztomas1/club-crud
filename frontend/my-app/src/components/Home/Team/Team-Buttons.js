@@ -4,10 +4,10 @@ import MyModal from "../../Modal";
 
 const TeamButtons = ({nameAbbreviation, id }) => {
 	return(
-		<div id="team-buttons">
+		<div className="team-buttons">
 			<div className="d-flex">
-				<a href={`/info/${nameAbbreviation}/${id}`} className="btn btn-primary">Info <i className="bi bi-arrows-angle-expand"></i></a>
-				<a href={`/edit/${nameAbbreviation}/${id}`} className="btn btn-secondary">Edit <i className="bi bi-pen"></i></a>
+				<a href={`/info/${nameAbbreviation}/${id}`}  id={`${id}-info-button`} className="btn btn-primary">Info <i className="bi bi-arrows-angle-expand"></i></a>
+				<a href={`/edit/${nameAbbreviation}/${id}`} id={`${id}-edit-button`} className="btn btn-secondary">Edit <i className="bi bi-pen"></i></a>
 				<MyModal nameAbbreviation={nameAbbreviation} id={id} />
 			</div>
 		</div>

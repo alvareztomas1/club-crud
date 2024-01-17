@@ -20,6 +20,7 @@ const MyToast = ({ type, text, showToast }) => {
 						onClose={() => setShow(false)} 
 						show={show} 
 						delay={3000} 
+						id="toast"
 						autohide>
 
 						<div className="d-flex">

@@ -4,7 +4,7 @@ const Loading = ({loading}) => {
 
 	return (
 		<div className={`d-flex justify-content-center ${loading ? "" : "visually-hidden"}`}>
-			<div className="spinner-border text-light" role="status">
+			<div id="loading" className="spinner-border text-light" role="status">
 				<span className="visually-hidden">Loading...</span>
 			</div>
 		</div>

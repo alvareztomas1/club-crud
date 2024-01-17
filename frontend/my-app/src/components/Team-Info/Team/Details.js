@@ -6,7 +6,7 @@ const Details = ({ foundedYear, stadium, address }) => {
 			<h1>Team details</h1>
         
 			<p id="foundedYear" className="display-6">
-				<i className="bi bi-flag"></i> Founded year: {foundedYear}
+				<i className="bi bi-flag"></i>Founded year: {foundedYear}
 			</p>
             
 			<p id="stadium" className="display-6">

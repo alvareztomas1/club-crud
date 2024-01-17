@@ -3,10 +3,11 @@ import TeamButtons from "./Team-Buttons";
 import TeamLogo from "./Team-Logo";
 import TeamName from "./Team-Name";
 
+// eslint-disable-next-line no-unused-vars
 const Team = ({team, key }) => {
 	return(
 		<React.Fragment>
-			<div id={`${team.name}-${key}`} className="container text-center team-container team">
+			<div id={`${team.name}-${team.id}`} className="container text-center team-container team">
 				<div className="row align-items-center">
 					<div className="col">
 						<TeamLogo id={team.id} nameAbbreviattion={team.nameAbbreviation} logo={team.logo} />
