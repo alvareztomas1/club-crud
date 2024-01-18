@@ -26,4 +26,8 @@ function deleteTeam(teamId, teamsList, teamsListFilePath){
     return newTeamsList;
 }
 
-module.exports = { getTeamsList, addTeam, editTeam, deleteTeam };
+function saveChanges(teamsListFilePath, teamsData){
+    fs.writeFileSync(teamsListFilePath, JSON.stringify(teamsData));
+}
+
+module.exports = { getTeamsList, addTeam, editTeam, deleteTeam, saveChanges };

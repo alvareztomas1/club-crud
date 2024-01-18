@@ -1,6 +1,6 @@
 import Team from "../entitites/Team";
 
-function mapTeam(teamData){
+export function mapTeam(teamData){
 	const {
 		id,
 		name,

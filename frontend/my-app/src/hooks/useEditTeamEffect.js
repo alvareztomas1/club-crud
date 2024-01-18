@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React,{ useEffect } from "react";
-import getTeamsData from "../api/teams";
-import mapTeamList from "../mapper/mapper";
+import getTeamsData, { getTeamDataFromApi } from "../api/teams";
+import mapTeamList, { mapTeam } from "../mapper/mapper";
 import { editTeam } from "../api/teams";
 import setFormData from "../services/form-data";
 import { useNavigate } from "react-router-dom";
@@ -18,12 +18,11 @@ export default function useEditTeamEffect(state, dispatch, teamAbbreviation, sel
 		if(state.loading){
 			const getData = async () => {
 				try{
-					const teamsData = await getTeamsList();
-					const mappedTeamData = mapTeamList(teamsData);
-					const selectedTeam = getSelectedTeam(mappedTeamData, selectedTeamId);
+					const teamData = await getTeamDataFromApi(teamAbbreviation, selectedTeamId);
+					const mappedTeamData = mapTeam(teamData);
 					
-					document.title = `Edit ${selectedTeam.name}`;
-					dispatch({type: "SUCCESS", payload: selectedTeam});
+					document.title = `Edit ${mappedTeamData.name}`;
+					dispatch({type: "SUCCESS", payload: mappedTeamData});
 				}catch(e){
 					dispatch({type: "FAILURE", payload: e});
 

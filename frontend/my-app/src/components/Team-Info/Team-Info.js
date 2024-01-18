@@ -8,10 +8,10 @@ import { StateContext } from "../../context/State-provider";
 import useTeamInfoEffect from "../../hooks/useTeamInfoEffect";
 
 function TeamInfo() {
-	const { teamId } = useParams();
+	const { teamName, teamId } = useParams();
 	const {state, dispatch} = useContext(StateContext);
 
-	useTeamInfoEffect(state, dispatch, teamId);
+	useTeamInfoEffect(state, dispatch, teamName, teamId);
 	return(
 		<div id="team-info" className="container team-info">
 			<Loading loading={state.loading} />

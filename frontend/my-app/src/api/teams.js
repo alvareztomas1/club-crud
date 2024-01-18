@@ -11,6 +11,16 @@ export default async function getTeamsDataFromApi() {
 
 
 }
+export async function getTeamDataFromApi(teamName, teamId) {
+	try {
+		const response = await fetch(`http://localhost:8080/info/${teamName}/${teamId}`);
+		return response.json();
+	} catch (e) {
+		console.error("FAILED", e);
+	}
+
+
+}
 
 export async function getRestoredDatabase() {
 	try {

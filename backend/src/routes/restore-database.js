@@ -1,18 +1,18 @@
 const express = require("express");
 const path = require("path");
 const router = express.Router();
-const { getTeamsList } = require("../services/teams");
+const { getTeamsList, saveChanges } = require("../services/teams");
 
 router.get("/", (req, res) => {
-    const teamsListFilePath = path.join(__dirname, "../data/teams-backup.json"); 
-    const teamsList = getTeamsList(teamsListFilePath);
-
-    if(teamsList){
-       /* res.header('Access-Control-Allow-Origin', '*'); 
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');*/ 
+    const backupListFilePath = path.join(__dirname, "../data/teams-backup.json"); 
+    const backupTeamsList = getTeamsList(backupListFilePath);
+    const teamsDataFilePath = path.join(__dirname, "../data/teams.json");
+    
+    saveChanges(teamsDataFilePath, backupTeamsList)
+    if(backupTeamsList){
         res.setHeader('Content-Type', 'application/json')
             .status(200)
-                .send(teamsList);
+                .send(backupTeamsList);
 
     }else{
         res.status(404).send("ERROR 404! Web not found");

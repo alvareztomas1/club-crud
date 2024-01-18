@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/teams", teamsListRoute);
-app.use("/team", teamRoute);
+app.use("/info", teamRoute);
 app.use("/edit", editTeam);
 app.use("/add-team", addTeam);
 app.use("/delete", deleteTeam);

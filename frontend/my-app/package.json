@@ -20,7 +20,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "clean-install": "rmdir /s /q node_modules && npm install"
+
   },
   "eslintConfig": {
     "extends": [
