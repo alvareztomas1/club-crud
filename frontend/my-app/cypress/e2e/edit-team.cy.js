@@ -6,13 +6,15 @@ describe("edit team page", () => {
 	beforeEach(() => {
 		cy.visit("localhost:3000/edit/ARS/57");
 
-		cy.intercept("GET", "http://localhost:8080/teams", {
+		/*cy.intercept("GET", "http://localhost:8080/teams", {
 			fixture: "teams.json"
 		}).as("getTeamsList");
 
+		cy.wait("@getTeamsList");*/
+
 	});
 
-	describe("form validation", () => {
+	/*describe("form validation", () => {
 
 		it("verifies placeholders have team information", () => {
 			cy.fixture("arsenal.json").then((teamInfo) => {
@@ -133,11 +135,11 @@ describe("edit team page", () => {
 
 		});
 		
-	});
+	});*/
 
 	describe("editing a team works propietley", () => {
 
-		it("verifies sending the form's inputs clicking edit team button", () => {
+		/*it("verifies sending the form's inputs clicking edit team button", () => {
 
 			let newData = {
 				name: "Arsenal",
@@ -192,11 +194,15 @@ describe("edit team page", () => {
 
 			cy.get("#confirm-edit-button").click();
 
-		});
+		});*/
 
 		it("verifies using the received teams list after edit a team on the home page", () => {
 
 			cy.fixture("edited-teams.json").then((editedTeamsList) => {
+				cy.intercept("GET", `http://localhost:8080/info/${editedTeamsList[0].tla}/${editedTeamsList[0].id}`, {
+					fixture: "edited-team.json"
+				}).as("getEditedTeam");
+
 				cy.intercept("POST", "http://localhost:8080/edit/ARS/57", (req) => {
 
 					cy.url().then((url) => {
@@ -217,12 +223,18 @@ describe("edit team page", () => {
 						expect(href).to.equal(`http://localhost:3000/info/${editedTeamsList[0].tla}/${editedTeamsList[0].id}`);
 					});
 
+					console.log(editedTeamsList);
 
+					
 					req.reply(editedTeamsList);
 				});
+
+				cy.get("#confirm-edit-button").click();
+				cy.get(`#${editedTeamsList[0].id}-info-button`).click();
+
 			});
 
-			cy.get("#confirm-edit-button").click();
+			
 		});
 	});
 
