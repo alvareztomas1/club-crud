@@ -1,17 +1,10 @@
 describe("team info route", () => {
 
 	beforeEach(() => {
-		cy.visit("localhost:3000");
-		cy.intercept("GET", "http://localhost:8080/teams", {
-			fixture: "teams.json"
-		}).as("getTeamsList");
-
-		cy.wait("@getTeamsList");
-
-		cy.fixture("teams.json").then((teamsList)=> {
-			cy.get(`#${teamsList[0].id}-info-button`).click();
-
-		});
+		cy.visit("http://localhost:3000/info/ARS/57");
+		cy.intercept("GET", "http://localhost:8080/info/ARS/57",{
+			fixture: "arsenal.json"
+		}).as("getArsenalData");
 	});
 
 	it("verifies navigatin to the correct url with team info button", () => {

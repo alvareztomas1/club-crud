@@ -4,17 +4,15 @@ import "cypress-file-upload";
 
 describe("edit team page", () => {
 	beforeEach(() => {
-		cy.visit("localhost:3000/edit/ARS/57");
+		cy.visit("http://localhost:3000/edit/ARS/57");
 
-		/*cy.intercept("GET", "http://localhost:8080/teams", {
-			fixture: "teams.json"
-		}).as("getTeamsList");
-
-		cy.wait("@getTeamsList");*/
+		cy.intercept("GET", "http://localhost:8080/info/ARS/57",{
+			fixture: "arsenal.json"
+		}).as("getArsenalData");
 
 	});
 
-	/*describe("form validation", () => {
+	describe("form validation", () => {
 
 		it("verifies placeholders have team information", () => {
 			cy.fixture("arsenal.json").then((teamInfo) => {
@@ -135,11 +133,11 @@ describe("edit team page", () => {
 
 		});
 		
-	});*/
+	});
 
 	describe("editing a team works propietley", () => {
 
-		/*it("verifies sending the form's inputs clicking edit team button", () => {
+		it("verifies sending the form's inputs clicking edit team button", () => {
 
 			let newData = {
 				name: "Arsenal",
@@ -194,7 +192,7 @@ describe("edit team page", () => {
 
 			cy.get("#confirm-edit-button").click();
 
-		});*/
+		});
 
 		it("verifies using the received teams list after edit a team on the home page", () => {
 
