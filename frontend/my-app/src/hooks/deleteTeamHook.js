@@ -1,25 +1,17 @@
-import { useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { StateContext } from "../context/State-provider";
-import { deleteTeam } from "../api/teams";
-import mapTeamList from "../mapper/mapper";
+import handleDeleteTeam from "../services/delete-team/delete-team";
 
 
-export default function deleteTeamUseffect(){
+export default function deleteTeamUseffect(teamId, deleteTeam, mapTeamsList){
 	const navigate = useNavigate();
 	const { dispatch } = useContext(StateContext);
-	const { teamId } = useParams();
 
 
-	useEffect(() => {
-		const handleDelete = async () => {
-			const response = await deleteTeam(teamId);
-			const mappedTeamsList = mapTeamList(response);
-            
-			dispatch({ type: "SUCCESS", payload: mappedTeamsList });
-			navigate("/?showToast=true&type=danger&message=Team deleted successfully");
-		};
-       
-		handleDelete();
-	});
+	
+
+	handleDeleteTeam(teamId, deleteTeam, mapTeamsList, dispatch, navigate);
+
+	
 }
