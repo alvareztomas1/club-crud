@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import setFormData from "../services/form-data";
 import { addTeam } from "../api/teams";
-import mapTeamList from "../mapper/mapper";
+import mapTeamsList from "../mapper/mapper";
 import { StateContext } from "../context/State-provider";
 import { useNavigate } from "react-router-dom";
 import validateForm from "../services/validation";
@@ -20,14 +20,13 @@ export default function handleAddTeamButton() {
 	};
 	const handleFormValidation = async (formData) => {
 		const currentValidation = validateForm(formData);
-		
 		if(Object.values(currentValidation).includes(false)){
 			setValidation(currentValidation);
 
 			navigate("/add-team");
 		}else{
 			const response = await addTeam(formData);
-			const mappedTeamsList = mapTeamList(response);	
+			const mappedTeamsList = mapTeamsList(response);	
 		
 			dispatch({ type: "SUCCESS", payload: mappedTeamsList });
 			navigate("/?showToast=true&type=success&message=Team added successfully");

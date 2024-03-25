@@ -28,7 +28,7 @@ export function mapTeam(teamData){
 	);
 }
 
-export default function mapTeamList(teamsData){
+export default function mapTeamsList(teamsData){
 	const mappedData = teamsData.map((team) => mapTeam(team));
 	return mappedData;
 }
