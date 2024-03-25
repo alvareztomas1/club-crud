@@ -41,7 +41,7 @@ function validate(type, input) {
 		}
 		break;
 	case "address":
-		if (/^[a-zA-Z0-9\s\-.,'°]+$/.test(input)) {
+		if (/^[a-zA-Z0-9\s\-.,'°]{5,35}$/.test(input)) {
 			response = true;
 		} else {
 			response = false;
@@ -76,11 +76,6 @@ export default function validateForm(formData) {
 		const [key, value] = entry;
 		response[key] = validate(key, value);
 	}
-
-	/*
-	Object.keys(formInput).forEach((key) => {
-		response[key] = validate(key, formInput[key]);
-	});*/
 
 	return response;
 }
