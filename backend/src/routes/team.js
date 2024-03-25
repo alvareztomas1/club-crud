@@ -9,7 +9,6 @@ router.get('/:teamName/:id', (req, res) => {
     const teamsList = getTeamsList(teamsListFilePath);
     const selectedTeam = teamsList.find((team) => team.id === Number(id));
 
-    console.log(id);
 
     if(selectedTeam){
         res.setHeader('Content-Type', 'application/json').status(200).send(selectedTeam);
