@@ -8,7 +8,7 @@ const Phone = ({ validation }) => {
 				<input type="text"
 					className={`form-control is-${validation ? validation.phone ? "valid" : "invalid" : ""}`}
 					name="phone" id="phone" placeholder="+44 (020) 76195003" />
-				<div className="invalid-feedback">
+				<div id="phone-feedback" className="invalid-feedback">
 					Please enter a valid phone number. It must follow the international format.
 				</div>
 			</div>

@@ -8,7 +8,7 @@ const TeamAbbreviation = ({ validation }) => {
 				<input type="text"
 					className={`form-control is-${validation ? validation.tla ? "valid" : "invalid" : ""}`}
 					name="nameAbbreviation" id="nameAbbreviation" placeholder="ARS" required/>
-				<div className="invalid-feedback">
+				<div id="name-abbreviation-feedback" className="invalid-feedback">
                     Please enter a valid shortname. It must be a three capital letters.
 				</div>
 			</div>

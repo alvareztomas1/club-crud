@@ -8,8 +8,8 @@ const Address = ({ validation }) => {
 				<input type="text"
 					className={`form-control is-${validation ? validation.address ? "valid" : "invalid" : ""}`}
 					name="address" id="address" placeholder="75 Drayton Park London N5 1BU" required/>
-				<div className="invalid-feedback">
-                    Please enter a valid address. The valid special characters are: - , . &rsquo; °.
+				<div id="address-feedback" className="invalid-feedback">
+                    Please enter a valid address. It must be between 5 and 35 characters. The valid special characters are: - , . &rsquo; °.
 				</div>
 			</div>
 		</div>

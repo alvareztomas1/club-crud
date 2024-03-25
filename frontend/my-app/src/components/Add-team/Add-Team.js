@@ -1,11 +1,10 @@
 import React from "react";
 import Buttons from "./Buttons";
 import FormInputs from "./Form-inputs";
-
 import handleAddTeamButton from "../../hooks/addTeamHook";
 
 const AddTeam = ({ setRedirect }) => {
-	const { addTeamOnSubmit, validation } = handleAddTeamButton(setRedirect);
+	const { validation, addTeamOnSubmit} = handleAddTeamButton(setRedirect);
 	return(
 		<div id="add-team" className="container">
 			<title>Add new team</title>

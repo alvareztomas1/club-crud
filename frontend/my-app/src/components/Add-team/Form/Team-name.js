@@ -8,7 +8,7 @@ const TeamName = ({ validation={validation} }) =>{
 				<input type="text"
 					className={`form-control is-${validation ? validation.name ? "valid" : "invalid" : ""}`}
 					name="name" id="name" placeholder="Arsenal FC" required />
-				<div className="invalid-feedback">
+				<div id="name-feedback" className="invalid-feedback">
                     Please enter a valid club name. It must be between 3 and 30 characters.
 				</div>
 			</div>

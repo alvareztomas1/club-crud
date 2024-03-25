@@ -10,7 +10,7 @@ const Address = ({address, validation}) => {
 					name="address" id="address" placeholder="75 Drayton Park London N5 1BU" defaultValue={address}
 					required/>
 				<div id="address-feedback" className="invalid-feedback">
-                    Please enter a valid address. The valid special characters are: - , . &rsquo; °.
+				Please enter a valid address. It must be between 5 and 35 characters. The valid special characters are: - , . ’ °.
 				</div>
 			</div>
 		</div>

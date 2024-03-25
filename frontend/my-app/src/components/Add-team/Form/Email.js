@@ -8,7 +8,7 @@ const Email = ({ validation }) => {
 				<input type="email"
 					className={`form-control is-${validation ? validation.email ? "valid" : "invalid" : ""}`}
 					name="email" id="email" placeholder="info@arsenal.co.uk" />
-				<div className="invalid-feedback">
+				<div id="email-feedback" className="invalid-feedback">
 					Please enter a valid email. It must follow the generic format.
 				</div>
 			</div>
