@@ -1,31 +1,13 @@
 import  { useEffect } from "react";
-import { mapTeam } from "../mapper/mapper";
-import { getTeamDataFromApi } from "../api/teams";
+import showTeamIformation from "../services/team-info/team-info";
 
 
-export default function useTeamInfoEffect(state, dispatch, teamName, teamId) {
+
+export default function useTeamInfoEffect(state, dispatch, teamNameAbbreviation, teamId, getTeamDataFromApi, mapTeam) {
 
 	useEffect(() => {
 		if(state.loading){
-
-			const getData = async () => {
-				try{
-					/*const teamsData = await getTeamsList();
-					const mappedTeamData = mapTeamList(teamsData);
-					const selectedTeam = getSelectedTeam(mappedTeamData, selectedTeamId);*/
-
-					const teamData = await getTeamDataFromApi(teamName, teamId);
-					console.log(teamData);
-					const mappedTeamData = mapTeam(teamData);
-					
-					document.title = `${mappedTeamData.name} Info`;
-
-					dispatch({type: "SUCCESS", payload: mappedTeamData});
-				}catch(e){
-					dispatch({type: "FAILURE", payload: e});
-				}
-			};
-			getData();
+			showTeamIformation(dispatch, getTeamDataFromApi, mapTeam, teamNameAbbreviation, teamId);
 		}
 
 	}, [state.loading]);

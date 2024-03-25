@@ -6,12 +6,15 @@ import Information from "./Team/Information";
 import Buttons from "./Buttons";
 import { StateContext } from "../../context/State-provider";
 import useTeamInfoEffect from "../../hooks/useTeamInfoEffect";
+import { getTeamDataFromApi } from "../../api/teams";
+import { mapTeam } from "../../mapper/mapper";
 
 function TeamInfo() {
 	const { teamName, teamId } = useParams();
-	const {state, dispatch} = useContext(StateContext);
+	const { state, dispatch } = useContext(StateContext);
 
-	useTeamInfoEffect(state, dispatch, teamName, teamId);
+
+	useTeamInfoEffect(state, dispatch, teamName, teamId, getTeamDataFromApi, mapTeam);
 	return(
 		<div id="team-info" className="container team-info">
 			<Loading loading={state.loading} />
