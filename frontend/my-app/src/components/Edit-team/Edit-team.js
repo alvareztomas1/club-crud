@@ -5,17 +5,25 @@ import Loading from "../Loading";
 import Buttons from "./Buttons";
 import { StateContext } from "../../context/State-provider";
 import useEditTeamEffect from "../../hooks/useEditTeamEffect";
+import mapTeamsList, { mapTeam } from "../../mapper/mapper";
+import { getTeamDataFromApi } from "../../api/teams";
+import setFormData from "../../services/form-data";
 
-const EditTeam = ({ setRedirect }) => {
+const EditTeam = () => {
 	const { teamName, teamId } = useParams();
-	const {state, dispatch} = useContext(StateContext);
-	const { handleOnSubmit, validation } = useEditTeamEffect(state, dispatch, teamName, teamId, setRedirect);
+	const { state, dispatch } = useContext(StateContext);
+	const { handleOnSubmit, validation } = useEditTeamEffect(state, dispatch, teamName, teamId, getTeamDataFromApi, mapTeam, mapTeamsList);
 	return (
 		<div id="edit-team" className="container">
-			<form  onSubmit={handleOnSubmit} action={`/edit/${teamName}/${teamId}`} method="POST" encType="multipart/form-data">
-				<Loading loading={state.loading}/>
+			<form onSubmit={(e) => {
+				e.preventDefault();
+				const formData = setFormData(e.target);
+				handleOnSubmit(formData);
+			}} action={`/edit/${teamName}/${teamId}`} method="POST" encType="multipart/form-data">
+
+				<Loading loading={state.loading} />
 				<FormInputs validation={validation} teamData={state.data} />
-				<Buttons teamData={state.data}/>
+				<Buttons teamData={state.data} />
 			</form>
 		</div>
 	);
