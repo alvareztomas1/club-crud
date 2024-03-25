@@ -9,7 +9,8 @@ import { useContext } from "react";
 import paramSearch from "../../services/params";
 import AddTeamButton from "./Add-team-button";
 import RestoreButton from "./Restore-button";
-
+import getTeamsDataFromApi from "../../api/teams";
+import mapTeamsList from "../../mapper/mapper";
 
 function Home() {
 	const { state, dispatch } = useContext(StateContext);
@@ -17,9 +18,7 @@ function Home() {
 	const typeParam = paramSearch("type");
 	const messageParam = paramSearch("message");
 
-	useHomeEffect(state, dispatch); 
-
-	
+	useHomeEffect(state, dispatch, getTeamsDataFromApi, mapTeamsList); 
 
 	return (
 		<div id="home">
