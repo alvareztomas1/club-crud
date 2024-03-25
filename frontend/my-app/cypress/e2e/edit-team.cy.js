@@ -14,33 +14,32 @@ describe("edit team page", () => {
 
 	describe("form validation", () => {
 
-		it("verifies placeholders have team information", () => {
+		it("verifies input values have team information", () => {
 			cy.fixture("arsenal.json").then((teamInfo) => {
-				cy.url().should("eq", "http://localhost:3000/edit/ARS/57");
 
-				cy.get("#name").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.name);
+				cy.get("#name").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.name);
 				});
-				cy.get("#nameAbbreviation").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.tla);
+				cy.get("#nameAbbreviation").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.tla);
 				});
-				cy.get("#website").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.website);
+				cy.get("#website").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.website);
 				});
-				cy.get("#phone").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.phone);
+				cy.get("#phone").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.phone);
 				});
-				cy.get("#founded-year").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(`${teamInfo.founded}`);
+				cy.get("#founded-year").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(`${teamInfo.founded}`);
 				});
-				cy.get("#address").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.address);
+				cy.get("#address").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.address);
 				});
-				cy.get("#stadium").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.venue);
+				cy.get("#stadium").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.venue);
 				});
-				cy.get("#email").invoke("prop", "placeholder").then((placeholder) => {
-					expect(placeholder).to.equal(teamInfo.email);
+				cy.get("#email").invoke("prop", "value").then((value) => {
+					expect(value).to.equal(teamInfo.email);
 				});
 
 
@@ -85,7 +84,7 @@ describe("edit team page", () => {
 			cy.get("#phone-feedback").invoke("text").should("eq", "Please enter a valid phone number. It must follow the international format.");
 			cy.get("#phone").should("have.class", "form-control is-invalid");
 		    
-			cy.get("#address-feedback").invoke("text").should("eq", "Please enter a valid address. The valid special characters are: - , . ’ °.");
+			cy.get("#address-feedback").invoke("text").should("eq", "Please enter a valid address. It must be between 5 and 35 characters. The valid special characters are: - , . ’ °.");
 			cy.get("#address").should("have.class", "form-control is-invalid");
 
 			cy.get("#stadium-feedback").invoke("text").should("eq", "Please enter a valid stadium name. It must be between 3 and 30 characters and not contain special characters.");
@@ -192,44 +191,58 @@ describe("edit team page", () => {
 
 			cy.get("#confirm-edit-button").click();
 
-		});
 
 		it("verifies using the received teams list after edit a team on the home page", () => {
 
-			cy.fixture("edited-teams.json").then((editedTeamsList) => {
-				cy.intercept("GET", `http://localhost:8080/info/${editedTeamsList[0].tla}/${editedTeamsList[0].id}`, {
-					fixture: "edited-team.json"
-				}).as("getEditedTeam");
+			cy.fixture("edited-team.json").then((editedTeam) => {
+				cy.fixture("edited-teams.json").then((editedTeamsList) => {
+					cy.intercept("GET", `http://localhost:8080/info/${editedTeam.tla}/${editedTeam.id}`, {
+						fixture: "edited-team.json"
+					}).as("getEditedTeam");
 
-				cy.intercept("POST", "http://localhost:8080/edit/ARS/57", (req) => {
+					cy.intercept("POST", "http://localhost:8080/edit/ARS/57", (req) => {
 
-					cy.url().then((url) => {
-						expect(decodeURIComponent(url)).to.equal("http://localhost:3000/?showToast=true&type=primary&message=Team edited successfully");
-					});
+						cy.url().then((url) => {
+							expect(decodeURIComponent(url)).to.equal("http://localhost:3000/?showToast=true&type=primary&message=Team edited successfully");
+						});
 
-					cy.get("#toast").should("be.visible");
-					cy.get("#toast").should("have.class", "toast align-items-center text-bg-primary border-0");
-					cy.get("#toast").should("not.exist");
+						cy.get("#toast").should("be.visible");
+						cy.get("#toast").should("have.class", "toast align-items-center text-bg-primary border-0");
+						cy.get("#toast").should("not.exist");
 
-					cy.get(".team-name").eq(0).should("have.text", editedTeamsList[0].name);
+						cy.get(".team-name").eq(0).should("have.text", editedTeam.name);
 
-					cy.get(".logo").invoke("prop", "src").then((src) => {
-						expect(src).to.equal(editedTeamsList[0].crestUrl);
+						cy.get(".logo").invoke("prop", "src").then((src) => {
+							expect(src).to.equal(editedTeam.crestUrl);
 
-					});
-					cy.get(`#${editedTeamsList[0].id}-info-button`).invoke("prop", "href").then((href) => {
-						expect(href).to.equal(`http://localhost:3000/info/${editedTeamsList[0].tla}/${editedTeamsList[0].id}`);
-					});
+						});
+						cy.get(`#${editedTeam.id}-info-button`).invoke("prop", "href").then((href) => {
+							expect(href).to.equal(`http://localhost:3000/info/${editedTeam.tla}/${editedTeam.id}`);
+						});
 
-					console.log(editedTeamsList);
 
 					
-					req.reply(editedTeamsList);
+						req.reply(editedTeamsList);
+					}).as("editTeam");
+
+					cy.get("#confirm-edit-button").click();
+					cy.get(`#${editedTeam.id}-info-button`).click();
+
+					cy.url().should("eq", `http://localhost:3000/info/${editedTeam.tla}/${editedTeam.id}`);
+
+					cy.get("#team-name").should("have.text", editedTeam.name);
+					cy.get(".team-info-logo").invoke("prop", "src").then((logo) => {
+						expect(logo).to.equal(editedTeam.crestUrl);
+					});
+					cy.get("#phone").should("have.text", editedTeam.phone);
+					cy.get("#email").should("have.text", editedTeam.email);
+					cy.get("#foundedYear").should("have.text", `Founded year: ${editedTeam.founded}`);
+					cy.get("#website").should("have.text", editedTeam.website);
+					cy.get("#stadium").should("have.text",`Stadium: ${editedTeam.venue}`);
+					cy.get("#address").should("have.text",`Address: ${editedTeam.address}`);
+
 				});
-
-				cy.get("#confirm-edit-button").click();
-				cy.get(`#${editedTeamsList[0].id}-info-button`).click();
-
+				
 			});
 
 			
