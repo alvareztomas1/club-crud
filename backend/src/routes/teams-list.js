@@ -8,8 +8,6 @@ router.get("/", (req, res) => {
     const teamsList = getTeamsList(teamsListFilePath);
 
     if(teamsList){
-       /* res.header('Access-Control-Allow-Origin', '*'); 
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');*/ 
         res.setHeader('Content-Type', 'application/json')
             .status(200)
                 .send(teamsList);
