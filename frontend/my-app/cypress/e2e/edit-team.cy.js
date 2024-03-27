@@ -192,62 +192,64 @@ describe("edit team page", () => {
 			cy.get("#confirm-edit-button").click();
 
 
-		it("verifies using the received teams list after edit a team on the home page", () => {
+			it("verifies using the received teams list after edit a team on the home page", () => {
 
-			cy.fixture("edited-team.json").then((editedTeam) => {
-				cy.fixture("edited-teams.json").then((editedTeamsList) => {
-					cy.intercept("GET", `http://localhost:8080/info/${editedTeam.tla}/${editedTeam.id}`, {
-						fixture: "edited-team.json"
-					}).as("getEditedTeam");
+				cy.fixture("edited-team.json").then((editedTeam) => {
+					cy.fixture("edited-teams.json").then((editedTeamsList) => {
+						cy.intercept("GET", `http://localhost:8080/info/${editedTeam.tla}/${editedTeam.id}`, {
+							fixture: "edited-team.json"
+						}).as("getEditedTeam");
 
-					cy.intercept("POST", "http://localhost:8080/edit/ARS/57", (req) => {
+						cy.intercept("POST", "http://localhost:8080/edit/ARS/57", (req) => {
 
-						cy.url().then((url) => {
-							expect(decodeURIComponent(url)).to.equal("http://localhost:3000/?showToast=true&type=primary&message=Team edited successfully");
-						});
+							cy.url().then((url) => {
+								expect(decodeURIComponent(url)).to.equal("http://localhost:3000/?showToast=true&type=primary&message=Team edited successfully");
+							});
 
-						cy.get("#toast").should("be.visible");
-						cy.get("#toast").should("have.class", "toast align-items-center text-bg-primary border-0");
-						cy.get("#toast").should("not.exist");
+							cy.get("#toast").should("be.visible");
+							cy.get("#toast").should("have.class", "toast align-items-center text-bg-primary border-0");
+							cy.get("#toast").should("not.exist");
 
-						cy.get(".team-name").eq(0).should("have.text", editedTeam.name);
+							cy.get(".team-name").eq(0).should("have.text", editedTeam.name);
 
-						cy.get(".logo").invoke("prop", "src").then((src) => {
-							expect(src).to.equal(editedTeam.crestUrl);
+							cy.get(".logo").invoke("prop", "src").then((src) => {
+								expect(src).to.equal(editedTeam.crestUrl);
 
-						});
-						cy.get(`#${editedTeam.id}-info-button`).invoke("prop", "href").then((href) => {
-							expect(href).to.equal(`http://localhost:3000/info/${editedTeam.tla}/${editedTeam.id}`);
-						});
+							});
+							cy.get(`#${editedTeam.id}-info-button`).invoke("prop", "href").then((href) => {
+								expect(href).to.equal(`http://localhost:3000/info/${editedTeam.tla}/${editedTeam.id}`);
+							});
 
 
 					
-						req.reply(editedTeamsList);
-					}).as("editTeam");
+							req.reply(editedTeamsList);
+						}).as("editTeam");
 
-					cy.get("#confirm-edit-button").click();
-					cy.get(`#${editedTeam.id}-info-button`).click();
+						cy.get("#confirm-edit-button").click();
+						cy.get(`#${editedTeam.id}-info-button`).click();
 
-					cy.url().should("eq", `http://localhost:3000/info/${editedTeam.tla}/${editedTeam.id}`);
+						cy.url().should("eq", `http://localhost:3000/info/${editedTeam.tla}/${editedTeam.id}`);
 
-					cy.get("#team-name").should("have.text", editedTeam.name);
-					cy.get(".team-info-logo").invoke("prop", "src").then((logo) => {
-						expect(logo).to.equal(editedTeam.crestUrl);
+						cy.get("#team-name").should("have.text", editedTeam.name);
+						cy.get(".team-info-logo").invoke("prop", "src").then((logo) => {
+							expect(logo).to.equal(editedTeam.crestUrl);
+						});
+						cy.get("#phone").should("have.text", editedTeam.phone);
+						cy.get("#email").should("have.text", editedTeam.email);
+						cy.get("#foundedYear").should("have.text", `Founded year: ${editedTeam.founded}`);
+						cy.get("#website").should("have.text", editedTeam.website);
+						cy.get("#stadium").should("have.text",`Stadium: ${editedTeam.venue}`);
+						cy.get("#address").should("have.text",`Address: ${editedTeam.address}`);
+
 					});
-					cy.get("#phone").should("have.text", editedTeam.phone);
-					cy.get("#email").should("have.text", editedTeam.email);
-					cy.get("#foundedYear").should("have.text", `Founded year: ${editedTeam.founded}`);
-					cy.get("#website").should("have.text", editedTeam.website);
-					cy.get("#stadium").should("have.text",`Stadium: ${editedTeam.venue}`);
-					cy.get("#address").should("have.text",`Address: ${editedTeam.address}`);
-
-				});
 				
-			});
+				});
 
 			
+			});
 		});
-	});
 
+	
+	});
 
 });
