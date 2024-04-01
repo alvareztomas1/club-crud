@@ -36,7 +36,7 @@ export async function getRestoredDatabase() {
 export async function editTeam(nameAbbreviation, teamId, editedTeam) {
 	try {
 		const response = await fetch(`http://localhost:8080/edit/${nameAbbreviation}/${teamId}`, {
-			method: "POST",
+			method: "PUT",
 			body: editedTeam
 		});
 

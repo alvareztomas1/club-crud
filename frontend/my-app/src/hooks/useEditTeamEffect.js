@@ -12,7 +12,6 @@ export default function useEditTeamEffect(state, dispatch, teamAbbreviation, sel
 
 	useEffect(() => {
 		if(state.loading){
-
 			getEditTeamData(getTeamDataFromApi, mapTeam, teamAbbreviation, selectedTeamId, dispatch);
 		}
 	}, [state.loading]);

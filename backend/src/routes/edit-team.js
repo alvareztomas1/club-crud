@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 
 
 
-router.post("/:teamName/:id", upload.single("crestUrl"), (req, res) => {
+router.put("/:teamName/:id", upload.single("crestUrl"), (req, res) => {
     const { id } = req.params;
     const teamsListFilePath = path.join(__dirname, "../data/teams.json");
     const teamsListData = getTeamsList(teamsListFilePath);
